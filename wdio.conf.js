@@ -24,7 +24,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './specs/*.js'
+        './specs/wdio*.js'
     ],
     // Patterns to exclude.
     exclude: [

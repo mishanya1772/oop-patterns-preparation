@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run ./wdio.conf.js"
+    "wdio": "npx wdio run ./wdio.conf.js",
+    "playwright": "jest --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
@@ -22,5 +23,11 @@
   },
   "dependencies": {
     "chai": "^4.3.4"
+  },
+  "jest": {
+    "preset": "jest-playwright-preset",
+    "testMatch": [
+      "**/playwright test.js"
+    ]
   }
 }

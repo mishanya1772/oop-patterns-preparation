@@ -16,6 +16,8 @@
 *.nar
 *.ear
 *.zip
+node_modules
+.idea
 *.tar.gz
 *.rar
 
