@@ -27,7 +27,7 @@
   "jest": {
     "preset": "jest-playwright-preset",
     "testMatch": [
-      "**/playwright test.js"
+      "**/test.js"
     ]
   }
 }
