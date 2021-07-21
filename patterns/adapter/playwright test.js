@@ -1,40 +1,33 @@
-const { chromium } = require('playwright');
-let browser;
-let page;
+const Browser = require('../singleton');
 
 class PlaywrightTest {
   constructor() {
     this.alertDialog = null;
+    this.page = null;
   }
 
   async goUrl(url = `https://www.globalsqa.com/angularJs-protractor/BankingProject`) {
-    browser = await chromium.launch({
-      args: ['--start-maximized'],
-      headless: false
-    });
-    page = await browser.newPage();
-
-    await page.goto(url);
-    expect(await page.title()).toBe('XYZ Bank');
-
-    page.on('dialog', async (dialog) => {
+    this.page = await new Browser().tab;
+    this.page.on('dialog', async (dialog) => {
       this.alertDialog = await dialog.message();
       await dialog.accept();
     });
+
+    await this.page.goto(url);
+    expect(await this.page.title()).toBe('XYZ Bank');
   }
 
   async clickOn(locator) {
-    return page.click(locator);
+    return this.page.click(locator);
   }
 
   async fillNewCustomerData(firstName = 'Test 1', lastName = 'Test 2', postCode = 'Test 3') {
-    await page.fill('[placeholder="First Name"]', 'Test 1');
-    await page.fill('[placeholder="Last Name"]', 'Test 1');
-    await page.fill('[placeholder="Post Code"]', 'Test 1');
+    await this.page.fill('[placeholder="First Name"]', 'Test 1');
+    await this.page.fill('[placeholder="Last Name"]', 'Test 1');
+    await this.page.fill('[placeholder="Post Code"]', 'Test 1');
   }
 
   async getAlertText() {
-    await browser.close();
     return this.alertDialog;
   }
 }

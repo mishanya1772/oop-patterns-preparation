@@ -28,6 +28,9 @@
     "preset": "jest-playwright-preset",
     "testMatch": [
       "**/test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./specs/hooks.js"
     ]
   }
 }
