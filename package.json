@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "wdio": "npx wdio run ./wdio.conf.js",
-    "playwright": "jest --detectOpenHandles"
+    "wdio": "set conf=wdio && npx wdio run ./wdio.conf.js",
+    "playwright": "set conf=playwright && jest --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",

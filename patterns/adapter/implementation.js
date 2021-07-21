@@ -1,7 +1,6 @@
-const playwrightBrowser = new (require('./playwright test'))();
-const wdioBrowser = new (require('./wdio test'))();
+const instance = require('../module')();
 
-module.exports = new class{
+module.exports = new class {
   constructor(browserInstance) {
     this.browserInstance = browserInstance;
   }
@@ -21,4 +20,4 @@ module.exports = new class{
   async fillNewCustomerData() {
     return this.browserInstance.fillNewCustomerData();
   }
-}(playwrightBrowser);
+}(instance);
