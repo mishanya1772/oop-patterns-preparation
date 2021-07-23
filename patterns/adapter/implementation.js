@@ -5,7 +5,7 @@ module.exports = new class {
     this.browserInstance = browserInstance;
   }
 
-  async open(url) {
+  async open(url = `https://www.globalsqa.com/angularJs-protractor/BankingProject`) {
     return this.browserInstance.goUrl(url);
   }
 

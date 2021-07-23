@@ -1,12 +1,14 @@
 const Browser = require('../singleton');
+const Data = require('../builder');
 
 class PlaywrightTest {
   constructor() {
     this.alertDialog = null;
     this.page = null;
+    this.user = new Data();
   }
 
-  async goUrl(url = `https://www.globalsqa.com/angularJs-protractor/BankingProject`) {
+  async goUrl(url) {
     this.page = await new Browser().tab;
     this.page.on('dialog', async (dialog) => {
       this.alertDialog = await dialog.message();
@@ -21,10 +23,12 @@ class PlaywrightTest {
     return this.page.click(locator);
   }
 
-  async fillNewCustomerData(firstName = 'Test 1', lastName = 'Test 2', postCode = 'Test 3') {
-    await this.page.fill('[placeholder="First Name"]', 'Test 1');
-    await this.page.fill('[placeholder="Last Name"]', 'Test 1');
-    await this.page.fill('[placeholder="Post Code"]', 'Test 1');
+  async fillNewCustomerData() {
+    const userData = await this.user.random().get();
+
+    await this.page.fill('[placeholder="First Name"]', await userData.first_name);
+    await this.page.fill('[placeholder="Last Name"]', await userData.last_name);
+    await this.page.fill('[placeholder="Post Code"]', await userData.address.zip_code);
   }
 
   async getAlertText() {
