@@ -1,8 +1,9 @@
-const Data = require('../builder');
+const api = require('../decorator');
+const dataPreparation = new (require('../builder'))();
 
 class WDIOBrowser {
   constructor() {
-    this.user = new Data();
+    this.user = api(dataPreparation);
   }
 
   async goUrl(url) {
@@ -16,7 +17,10 @@ class WDIOBrowser {
   }
 
   async fillNewCustomerData(firstName = 'Test 1', lastName = 'Test 2', postCode = 'Test 3') {
-    const userData = await this.user.byCountry().byCity().get();
+    const userData = await this.user
+      .byCountry()
+      .byCity()
+      .get();
 
     await (await $('[placeholder="First Name"]')).setValue(await userData.first_name);
     await (await $('[placeholder="Last Name"]')).setValue(await userData.last_name);
