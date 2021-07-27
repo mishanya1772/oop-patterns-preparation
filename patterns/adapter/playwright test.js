@@ -1,11 +1,12 @@
 const Browser = require('../singleton');
-const Data = require('../builder');
+const api = require('../decorator');
+const dataPreparation = new (require('../builder'))();
 
 class PlaywrightTest {
   constructor() {
     this.alertDialog = null;
     this.page = null;
-    this.user = new Data();
+    this.user = api(dataPreparation);
   }
 
   async goUrl(url) {

@@ -1,5 +1,3 @@
-const got = require('got');
-
 class PostcodeContract {
   constructor() {
     this.url = 'https://random-data-api.com/api';
@@ -18,11 +16,6 @@ class PostcodeContract {
   byCity(city = 'Cleveland Borough') {
     this.url += `&city=${city}`;
     return this;
-  }
-
-  async get() {
-    const response = await got(this.url);
-    return JSON.parse(response.body);
   }
 }
 
